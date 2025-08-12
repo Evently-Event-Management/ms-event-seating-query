@@ -18,17 +18,17 @@ spring:
       # We will deserialize the value as a simple String
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
-    security:
-      oauth2:
-        client:
-          provider:
-            keycloak:
-              issuer-uri: ${KEYCLOAK_ISSUER_URI:http://host.docker.internal:8080/realms/event-ticketing}
-          registration:
-            # This client is used for M2M communication
-            keycloak-m2m-client:
-              provider: keycloak
-              client-id: query-service-client
-              client-secret: ${QUERY_SERVICE_CLIENT_SECRET}
-              authorization-grant-type: client_credentials
-              scope: openid
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/event-ticketing}
+        registration:
+          # This client is used for M2M communication
+          keycloak-m2m-client:
+            provider: keycloak
+            client-id: query-service-client
+            client-secret: ${QUERY_SERVICE_CLIENT_SECRET}
+            authorization-grant-type: client_credentials
+            scope: internal-api
