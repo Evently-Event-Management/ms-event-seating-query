@@ -7,12 +7,12 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/event-read-model
+      uri: ${MONGODB_URI:mongodb://localhost:27017/mydatabase}
 
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
-      group-id: projector-group
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      group-id: ${KAFKA_GROUP_ID:query-service-group}
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       # We will deserialize the value as a simple String
@@ -29,6 +29,6 @@ spring:
             keycloak-m2m-client:
               provider: keycloak
               client-id: query-service-client
-              client-secret: ${QUERY_SERVICE_CLIENT_SECRET} # Provide this via .env file
+              client-secret: ${QUERY_SERVICE_CLIENT_SECRET}
               authorization-grant-type: client_credentials
               scope: openid
